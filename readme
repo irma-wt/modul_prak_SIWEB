@@ -1,0 +1,43 @@
+Kode HTML tersebut merupakan tampilan website sederhana untuk Sistem Manajemen Sepatu “Cibaduyut Shoes” yang dibuat menggunakan HTML dan framework Bootstrap 5. Struktur dasar dimulai dengan deklarasi <!DOCTYPE html> yang menandakan bahwa dokumen menggunakan HTML5. Pada bagian <html lang="en"> ditentukan bahwa bahasa utama halaman adalah bahasa Inggris.
+
+Di dalam bagian <head>, terdapat pengaturan karakter menggunakan <meta charset="UTF-8"> agar website dapat membaca berbagai jenis karakter dengan baik. Judul halaman ditentukan menggunakan tag <title> sehingga teks “Sistem Manajemen Sepatu” akan tampil pada tab browser. Selain itu, terdapat link CDN Bootstrap 5 yang berfungsi untuk memberikan desain dan tata letak yang rapi secara instan tanpa harus menulis CSS dari awal. File tambahan css/style.css juga dihubungkan untuk menambahkan styling khusus di luar Bootstrap.
+
+Pada bagian <body>, terdapat beberapa komponen utama. Pertama adalah navbar (navigation bar) dengan warna gelap menggunakan class navbar-dark bg-dark. Di dalamnya terdapat nama brand “CIBADUYUT SHOES”. Navbar ini berfungsi sebagai bagian header atau identitas utama website.
+
+Selanjutnya terdapat bagian hero section, yaitu area besar di bawah navbar dengan teks utama “Sistem Manajemen Sepatu” dan subjudul “Kelola Data Sepatu Dengan Mudah”. Bagian ini biasanya digunakan sebagai tampilan pembuka agar website terlihat lebih menarik dan informatif.
+
+Setelah itu terdapat bagian dashboard ringkasan data yang terdiri dari tiga card, yaitu:
+
+Total Produk (12)
+
+Stok Tersedia (85)
+
+Kategori (3)
+
+Ketiga card tersebut menggunakan komponen Bootstrap berbentuk kotak (card) yang disusun dalam satu baris menggunakan sistem grid (row dan col-md-4). Bagian ini berfungsi untuk menampilkan informasi statistik secara singkat.
+
+Di bawah dashboard terdapat bagian Daftar Sepatu yang menampilkan tiga produk, yaitu:
+
+Nike P-6000
+
+Nike Air Force 1
+
+Nike Air Jordan 1 Low
+
+Setiap produk ditampilkan dalam bentuk card yang berisi gambar sepatu, nama produk, harga, stok, dan tombol “Detail”. Layout ini juga menggunakan sistem grid Bootstrap agar tampil rapi dan responsif.
+
+Berikutnya terdapat bagian form Tambah Sepatu. Form ini digunakan untuk menambahkan data sepatu baru. Di dalamnya terdapat beberapa input:
+
+Nama Sepatu (input text)
+
+Harga (input number)
+
+Stok (input number)
+
+Kategori (dropdown select: Running, Basket, Casual)
+
+Di bagian bawah form terdapat tombol “Simpan” untuk mengirim data. Secara tampilan, form ini sudah menggunakan class Bootstrap seperti form-control dan form-select agar terlihat rapi dan modern.
+
+Terakhir terdapat bagian footer dengan latar belakang gelap dan teks putih yang menampilkan copyright “@ 2026 Sistem Manajemen Sepatu Toko Sepatu”. Di bagian paling bawah juga terdapat script Bootstrap JS untuk mendukung fungsi interaktif seperti navbar toggle.
+
+Secara keseluruhan, kode ini merupakan tampilan frontend sederhana untuk sistem manajemen data sepatu. Website ini sudah memiliki struktur lengkap mulai dari header, hero section, dashboard ringkasan, daftar produk, form input data, hingga footer, serta memanfaatkan Bootstrap agar tampilannya responsif dan menarik.
