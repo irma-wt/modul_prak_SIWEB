@@ -41,3 +41,16 @@ Di bagian bawah form terdapat tombol “Simpan” untuk mengirim data. Secara ta
 Terakhir terdapat bagian footer dengan latar belakang gelap dan teks putih yang menampilkan copyright “@ 2026 Sistem Manajemen Sepatu Toko Sepatu”. Di bagian paling bawah juga terdapat script Bootstrap JS untuk mendukung fungsi interaktif seperti navbar toggle.
 
 Secara keseluruhan, kode ini merupakan tampilan frontend sederhana untuk sistem manajemen data sepatu. Website ini sudah memiliki struktur lengkap mulai dari header, hero section, dashboard ringkasan, daftar produk, form input data, hingga footer, serta memanfaatkan Bootstrap agar tampilannya responsif dan menarik.
+
+WEEK 2
+Bagian navbar pada index.html berfungsi sebagai navigasi utama pada halaman website. Navbar biasanya berisi nama website atau brand serta menu seperti wishlist. Bagian ini menggunakan komponen Bootstrap agar tampilannya rapi, responsif, dan bisa menyesuaikan ukuran layar. Selain sebagai navigasi, navbar juga dapat menampilkan informasi tambahan seperti jumlah item wishlist yang sudah ditambahkan oleh pengguna.
+
+Selanjutnya terdapat bagian daftar sepatu yang ditampilkan dalam bentuk card. Setiap card berisi informasi produk seperti gambar sepatu, nama sepatu, harga, serta tombol untuk menambahkan sepatu ke wishlist. Struktur card dibuat menggunakan class Bootstrap agar tampilan tersusun rapi dalam bentuk grid. Bagian ini merupakan area utama tempat pengguna berinteraksi dengan produk.
+
+Setelah bagian card, terdapat modal wishlist. Modal adalah jendela pop-up yang muncul ketika pengguna menekan tombol wishlist. Modal ini berfungsi untuk menampilkan daftar sepatu yang sudah dipilih oleh pengguna. Isi modal biasanya berupa daftar item yang sudah ditambahkan beserta informasi seperti nama dan harga. Modal membantu menampilkan data tanpa perlu berpindah halaman.
+
+Kemudian masuk ke bagian script.js. File ini berisi logika program yang membuat website menjadi interaktif. Di dalamnya terdapat proses pengambilan elemen HTML menggunakan DOM, seperti menangkap tombol dan container wishlist. Setelah elemen ditangkap, JavaScript akan menambahkan event listener untuk mendeteksi aksi pengguna, misalnya saat tombol “Tambah ke Wishlist” diklik.
+
+Ketika tombol diklik, data sepatu akan dimasukkan ke dalam array dan disimpan ke dalam LocalStorage agar data tetap tersimpan meskipun halaman direfresh. Script juga akan memperbarui tampilan secara otomatis, seperti menambah jumlah item pada navbar dan menampilkan daftar terbaru di dalam modal wishlist.
+
+Secara keseluruhan, bagian HTML berfungsi untuk menampilkan struktur dan tampilan halaman, sedangkan file script.js berfungsi untuk mengatur interaksi, mengelola data, menyimpan data di browser, serta memperbarui tampilan secara dinamis sesuai dengan aksi pengguna.
