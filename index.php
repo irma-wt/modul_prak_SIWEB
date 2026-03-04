@@ -1,9 +1,12 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Sistem Manajemen Sepatu</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -13,7 +16,6 @@
         <div class="container">
             <a class="navbar-brand" href="#">CIBADUYUT SHOES</a>
 
-            <!-- Tombol selalu tampil, tidak di dalam collapse -->
             <div class="d-flex align-items-center ms-auto gap-2">
                 <button
                     class="btn btn-outline-warning btn-sm"
@@ -22,9 +24,17 @@
                 >
                     ⭐ Wishlist (<span id="wishlist-count">0</span>)
                 </button>
+
                 <button id="btn-theme" class="btn btn-outline-light btn-sm">
                     Mode Gelap
                 </button>
+
+                <?php if (isset($_SESSION['user'])): ?>
+                    <span class="text-warning fw-bold btn-sm"><?php echo htmlspecialchars($_SESSION['user']); ?></span>
+                    <a href="controller/logout.php" class="btn btn-danger btn-sm">Logout</a>
+                <?php else: ?>
+                    <a href="login.php" class="btn btn-warning btn-sm">Login</a>
+                <?php endif; ?>
             </div>
         </div>
     </nav>
@@ -44,7 +54,7 @@
                 <div class="card dashboard-card">
                     <div class="card-body">
                         <h5>Total Produk</h5>
-                        <h2>12</h2>
+                        <h2>3</h2>
                     </div>
                 </div>
             </div>
@@ -52,7 +62,7 @@
                 <div class="card dashboard-card">
                     <div class="card-body">
                         <h5>Stok Tersedia</h5>
-                        <h2>85</h2>
+                        <h2>27</h2>
                     </div>
                 </div>
             </div>
@@ -129,8 +139,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <ul class="list-group" id="daftar-wishlist">
-                    </ul>
+                    <ul class="list-group" id="daftar-wishlist"></ul>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
@@ -140,26 +149,27 @@
         </div>
     </div>
 
-    <!-- FORM TAMBAH SEPATU -->
+    <!-- FORM TAMBAH SEPATU — hanya tampil kalau sudah login -->
+    <?php if (isset($_SESSION['user'])): ?>
     <div class="container mt-5 mb-5">
         <h3 class="mb-4">Tambah Sepatu</h3>
         <div class="card p-4">
-            <form>
+            <form id="form-tambah">
                 <div class="mb-3">
                     <label class="form-label">Nama Sepatu</label>
-                    <input type="text" class="form-control" placeholder="Masukkan nama sepatu" />
+                    <input type="text" id="input-nama" class="form-control" placeholder="Masukkan nama sepatu" required />
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Harga</label>
-                    <input type="number" class="form-control" placeholder="Masukkan harga" />
+                    <input type="number" id="input-harga" class="form-control" placeholder="Masukkan harga" required />
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Stok</label>
-                    <input type="number" class="form-control" placeholder="Masukkan Stok" />
+                    <input type="number" id="input-stok" class="form-control" placeholder="Masukkan Stok" required />
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Kategori</label>
-                    <select class="form-select">
+                    <select id="input-kategori" class="form-select">
                         <option>Running</option>
                         <option>Basket</option>
                         <option>Casual</option>
@@ -169,17 +179,20 @@
             </form>
         </div>
     </div>
+    <?php else: ?>
+    <div class="container mt-5 mb-5 text-center">
+        <div class="card p-4">
+            <p class="mb-3 text-muted">🔒 Silakan <a href="login.php">login</a> terlebih dahulu untuk menambah produk sepatu.</p>
+        </div>
+    </div>
+    <?php endif; ?>
 
     <!-- FOOTER -->
     <footer class="bg-dark text-white text-center p-3">
         &copy; 2026 Sistem Manajemen Sepatu Toko Sepatu.
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
-<!-- Bootstrap HARUS di atas script.js -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" ...></script>
-<script src="js/script.js"></script>
-
 </body>
 </html>
