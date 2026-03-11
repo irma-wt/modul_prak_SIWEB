@@ -1,10 +1,13 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Sistem Manajemen Sepatu</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
 </head>
 <body>
 
@@ -13,18 +16,31 @@
         <div class="container">
             <a class="navbar-brand" href="#">CIBADUYUT SHOES</a>
 
-            <!-- Tombol selalu tampil, tidak di dalam collapse -->
-            <div class="d-flex align-items-center ms-auto gap-2">
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <button
-                    class="btn btn-outline-warning btn-sm"
+                    class="btn btn-outline-warning btn-sm me-2"
                     data-bs-toggle="modal"
                     data-bs-target="#wishlistModal"
                 >
                     ⭐ Wishlist (<span id="wishlist-count">0</span>)
                 </button>
-                <button id="btn-theme" class="btn btn-outline-light btn-sm">
+
+                <button id="btn-theme" class="btn btn-outline-light btn-sm me-2">
                     Mode Gelap
                 </button>
+
+                @if(session()->has('user'))
+                    <span class="text-white me-3">
+                        {{ session('user') }}
+                    </span>
+                    <a href="{{ route('logout') }}" class="btn btn-danger btn-sm">
+                        Logout
+                    </a>
+                @else
+                    <a href="{{ route('login') }}" class="btn btn-warning btn-sm">
+                        Login
+                    </a>
+                @endif
             </div>
         </div>
     </nav>
@@ -44,7 +60,7 @@
                 <div class="card dashboard-card">
                     <div class="card-body">
                         <h5>Total Produk</h5>
-                        <h2>12</h2>
+                        <h2>3</h2>
                     </div>
                 </div>
             </div>
@@ -52,7 +68,7 @@
                 <div class="card dashboard-card">
                     <div class="card-body">
                         <h5>Stok Tersedia</h5>
-                        <h2>85</h2>
+                        <h2>27</h2>
                     </div>
                 </div>
             </div>
@@ -74,7 +90,7 @@
 
             <div class="col-md-4 mb-4">
                 <div class="card h-100">
-                    <img src="assets/NIKE_P_6000.jpg" class="card-img-top" />
+                    <img src="{{ asset('assets/NIKE_P_6000.jpg') }}" class="card-img-top" alt="Sepatu" />
                     <div class="card-body">
                         <h5 class="card-title">Nike P-6000</h5>
                         <p class="card-text harga-text">Harga: Rp 1.429.000</p>
@@ -129,8 +145,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <ul class="list-group" id="daftar-wishlist">
-                    </ul>
+                    <ul class="list-group" id="daftar-wishlist"></ul>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
@@ -140,26 +155,27 @@
         </div>
     </div>
 
-    <!-- FORM TAMBAH SEPATU -->
+    <!-- FORM TAMBAH SEPATU — hanya tampil kalau sudah login -->
+    @if(session()->has('user'))
     <div class="container mt-5 mb-5">
         <h3 class="mb-4">Tambah Sepatu</h3>
         <div class="card p-4">
-            <form>
+            <form id="form-tambah">
                 <div class="mb-3">
                     <label class="form-label">Nama Sepatu</label>
-                    <input type="text" class="form-control" placeholder="Masukkan nama sepatu" />
+                    <input type="text" id="input-nama" class="form-control" placeholder="Masukkan nama sepatu" required />
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Harga</label>
-                    <input type="number" class="form-control" placeholder="Masukkan harga" />
+                    <input type="number" id="input-harga" class="form-control" placeholder="Masukkan harga" required />
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Stok</label>
-                    <input type="number" class="form-control" placeholder="Masukkan Stok" />
+                    <input type="number" id="input-stok" class="form-control" placeholder="Masukkan Stok" required />
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Kategori</label>
-                    <select class="form-select">
+                    <select id="input-kategori" class="form-select">
                         <option>Running</option>
                         <option>Basket</option>
                         <option>Casual</option>
@@ -169,17 +185,20 @@
             </form>
         </div>
     </div>
+    @else
+    <div class="container mt-5 mb-5 text-center">
+        <div class="card p-4">
+            <p class="mb-3 text-muted">🔒 Silakan <a href="{{ route('login') }}">login</a> terlebih dahulu untuk menambah produk sepatu.</p>
+        </div>
+    </div>
+    @endif
 
     <!-- FOOTER -->
     <footer class="bg-dark text-white text-center p-3">
         &copy; 2026 Sistem Manajemen Sepatu Toko Sepatu.
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-    <script src="js/script.js"></script>
-<!-- Bootstrap HARUS di atas script.js -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" ...></script>
-<script src="js/script.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
 </body>
 </html>
