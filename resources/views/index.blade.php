@@ -7,7 +7,7 @@ session_start();
     <meta charset="UTF-8">
     <title>Sistem Manajemen Sepatu</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
 </head>
 <body>
 
@@ -16,25 +16,31 @@ session_start();
         <div class="container">
             <a class="navbar-brand" href="#">CIBADUYUT SHOES</a>
 
-            <div class="d-flex align-items-center ms-auto gap-2">
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <button
-                    class="btn btn-outline-warning btn-sm"
+                    class="btn btn-outline-warning btn-sm me-2"
                     data-bs-toggle="modal"
                     data-bs-target="#wishlistModal"
                 >
                     ⭐ Wishlist (<span id="wishlist-count">0</span>)
                 </button>
 
-                <button id="btn-theme" class="btn btn-outline-light btn-sm">
+                <button id="btn-theme" class="btn btn-outline-light btn-sm me-2">
                     Mode Gelap
                 </button>
 
-                <?php if (isset($_SESSION['user'])): ?>
-                    <span class="text-warning fw-bold btn-sm"><?php echo htmlspecialchars($_SESSION['user']); ?></span>
-                    <a href="controller/logout.php" class="btn btn-danger btn-sm">Logout</a>
-                <?php else: ?>
-                    <a href="login.php" class="btn btn-warning btn-sm">Login</a>
-                <?php endif; ?>
+                @if(session()->has('user'))
+                    <span class="text-white me-3">
+                        {{ session('user') }}
+                    </span>
+                    <a href="{{ route('logout') }}" class="btn btn-danger btn-sm">
+                        Logout
+                    </a>
+                @else
+                    <a href="{{ route('login') }}" class="btn btn-warning btn-sm">
+                        Login
+                    </a>
+                @endif
             </div>
         </div>
     </nav>
@@ -84,7 +90,7 @@ session_start();
 
             <div class="col-md-4 mb-4">
                 <div class="card h-100">
-                    <img src="assets/NIKE_P_6000.jpg" class="card-img-top" />
+                    <img src="{{ asset('assets/NIKE_P_6000.jpg') }}" class="card-img-top" alt="Sepatu" />
                     <div class="card-body">
                         <h5 class="card-title">Nike P-6000</h5>
                         <p class="card-text harga-text">Harga: Rp 1.429.000</p>
@@ -150,7 +156,7 @@ session_start();
     </div>
 
     <!-- FORM TAMBAH SEPATU — hanya tampil kalau sudah login -->
-    <?php if (isset($_SESSION['user'])): ?>
+    @if(session()->has('user'))
     <div class="container mt-5 mb-5">
         <h3 class="mb-4">Tambah Sepatu</h3>
         <div class="card p-4">
@@ -179,13 +185,13 @@ session_start();
             </form>
         </div>
     </div>
-    <?php else: ?>
+    @else
     <div class="container mt-5 mb-5 text-center">
         <div class="card p-4">
-            <p class="mb-3 text-muted">🔒 Silakan <a href="login.php">login</a> terlebih dahulu untuk menambah produk sepatu.</p>
+            <p class="mb-3 text-muted">🔒 Silakan <a href="{{ route('login') }}">login</a> terlebih dahulu untuk menambah produk sepatu.</p>
         </div>
     </div>
-    <?php endif; ?>
+    @endif
 
     <!-- FOOTER -->
     <footer class="bg-dark text-white text-center p-3">
@@ -193,6 +199,6 @@ session_start();
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/script.js"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
 </body>
 </html>
