@@ -157,14 +157,16 @@ session_start();
 
     <!-- FORM TAMBAH SEPATU — hanya tampil kalau sudah login -->
     @if(session()->has('user'))
-    <div class="container mt-5 mb-5">
+    <div class="d-flex justify-content-between mb-3">
         <h3 class="mb-4">Tambah Sepatu</h3>
-        <div class="card p-4">
-            <form id="form-tambah">
-                <div class="mb-3">
-                    <label class="form-label">Nama Sepatu</label>
-                    <input type="text" id="input-nama" class="form-control" placeholder="Masukkan nama sepatu" required />
-                </div>
+        <a href="{{ route('products') }}" class="text-decoration-none text-white mb-3">Lihat Semua Sepatu >>></a>
+    </div>
+    <div class="card p-4">
+        <form id="form-tambah">
+            <div class="mb-3">
+                <label class="form-label">Nama Sepatu</label>
+                <input type="text" id="input-nama" class="form-control" placeholder="Masukkan nama sepatu" required />
+            </div>
                 <div class="mb-3">
                     <label class="form-label">Harga</label>
                     <input type="number" id="input-harga" class="form-control" placeholder="Masukkan harga" required />
